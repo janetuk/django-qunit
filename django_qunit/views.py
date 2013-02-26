@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response
 from django.conf import settings
 from django.utils import simplejson
+from django.test.client import Client
 
 import os
 
@@ -38,9 +39,12 @@ def get_suite_context(request, path):
     try:
         base_context = {}
         for i, template_name in enumerate(suite['html_fixtures']):
-            t = get_template(template_name)
-            context = Context(dict(base_context, template_name=template_name))
-            suite['html_fixtures'][i] = t.render(context)
+            if template_name[0] == '/':
+                suite['html_fixtures'][i] = Client().get(template_name).content
+            else:
+                t = get_template(template_name)
+                context = Context(dict(base_context, template_name=template_name))
+                suite['html_fixtures'][i] = t.render(context)
 
         return {
             'files': [path + file for file in files if file.endswith('js')],
