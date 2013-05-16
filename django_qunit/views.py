@@ -1,9 +1,9 @@
+import json
+import os
+
 from django.shortcuts import render_to_response
 from django.conf import settings
-from django.utils import simplejson
 from django.test.client import Client
-
-import os
 
 def get_suite_context(request, path):
     full_path = os.path.join(settings.QUNIT_TEST_DIRECTORY, path)
@@ -26,8 +26,8 @@ def get_suite_context(request, path):
     # load suite.json if present
     if 'suite.json' in files:
         file = open(os.path.join(full_path, 'suite.json'), 'r')
-        json = file.read()
-        suite.update(simplejson.loads(json))
+        json_content = file.read()
+        suite.update(json.loads(json_content))
 
     previous_directory = parent_directory(path)
 
