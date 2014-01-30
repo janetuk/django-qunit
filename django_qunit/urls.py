@@ -16,4 +16,6 @@ urlpatterns = patterns('',
     }, name='qunit_css'),
     url('^(?P<path>.*)$', 'django_qunit.views.run_tests',
         name='qunit_test_overview'),
+    url('^$', 'django_qunit.views.run_tests',
+        name='qunit_test_home'),
 )
