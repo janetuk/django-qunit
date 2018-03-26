@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^qunit/qunit.js', serve, { 'document_root': media_root, 'path': 'qunit/qunit.js', }, name='qunit_js'),
     url(r'^qunit/qunit.css', serve, { 'document_root': media_root, 'path': 'qunit/qunit.css',}, name='qunit_css'),
     url('^(?P<path>.*)$', views.run_tests, name='qunit_test_overview'),
+    url(r'^$', views.run_tests, name='qunit_test_home'),
 ]
