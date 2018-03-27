@@ -35,7 +35,6 @@ def get_suite_context(request, path):
     previous_directory = parent_directory(path)
 
     from django.template.loader import get_template
-    from django.template import Context
 
     orig_template_dirs = settings.TEMPLATE_DIRS
     settings.TEMPLATE_DIRS += (full_path,)
@@ -46,7 +45,7 @@ def get_suite_context(request, path):
                 suite['html_fixtures'][i] = Client().get(template_name).content
             else:
                 t = get_template(template_name)
-                context = Context(dict(base_context, template_name=template_name))
+                context = dict(base_context, template_name=template_name)
                 suite['html_fixtures'][i] = t.render(context)
 
         return {
