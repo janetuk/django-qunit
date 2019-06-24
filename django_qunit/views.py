@@ -7,7 +7,7 @@ from django.test.client import Client
 
 def get_suite_context(request, path):
     full_path = os.path.join(settings.QUNIT_TEST_DIRECTORY, path)
-    full_path, directories, files = os.walk(full_path).next()
+    full_path, directories, files = next(os.walk(full_path))
 
     # filter off osx dot files
     files = [f for f in files if not f[:2] == '._']
