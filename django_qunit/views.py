@@ -1,12 +1,13 @@
 import json
 import os
 
+from bos2.config.common_settings import QUNIT_TEST_DIRECTORY, TEMPLATE_DIRS
+
 from django.shortcuts import render_to_response
-from django.conf import settings
 from django.test.client import Client
 
 def get_suite_context(request, path):
-    full_path = os.path.join(settings.QUNIT_TEST_DIRECTORY, path)
+    full_path = os.path.join(QUNIT_TEST_DIRECTORY, path)
     full_path, directories, files = os.walk(full_path).next()
 
     # filter off osx dot files
@@ -36,8 +37,8 @@ def get_suite_context(request, path):
 
     from django.template.loader import get_template
 
-    orig_template_dirs = settings.TEMPLATE_DIRS
-    settings.TEMPLATE_DIRS += (full_path,)
+    orig_template_dirs = TEMPLATE_DIRS
+    TEMPLATE_DIRS += (full_path,)
     try:
         base_context = {}
         for i, template_name in enumerate(suite['html_fixtures']):
@@ -56,7 +57,7 @@ def get_suite_context(request, path):
             'suite': suite,
         }
     finally:
-        settings.TEMPLATE_DIRS = orig_template_dirs
+        TEMPLATE_DIRS = orig_template_dirs
 
 
 def run_tests(request, path):
