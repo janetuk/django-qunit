@@ -1,9 +1,8 @@
 
-from bos2.config.common_settings import QUNIT_TEST_DIRECTORY
-
+from django.conf import settings
 
 try:
-    QUNIT_TEST_DIRECTORY
+    settings.QUNIT_TEST_DIRECTORY
 except AttributeError:
     from django.core.exceptions import ImproperlyConfigured
 
