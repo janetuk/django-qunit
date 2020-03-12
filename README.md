@@ -1,6 +1,7 @@
 django-qunit
 ============
 
+
 django-qunit integrates the [QUnit Javascript testing framework][1] with
 [Django][2], making it possible to run QUnit tests alongside your Django
 app and test Ajax routines.
