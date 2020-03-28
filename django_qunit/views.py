@@ -3,7 +3,7 @@ import os
 
 from django.conf import settings
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.test.client import Client
 
 def get_suite_context(request, path):
@@ -63,7 +63,7 @@ def get_suite_context(request, path):
 
 def run_tests(request, path):
     suite_context = get_suite_context(request, path)
-    return render_to_response('qunit/index.html', suite_context)
+    return render(request, 'qunit/index.html', suite_context)
 
 def parent_directory(path):
     """
