@@ -8,7 +8,7 @@ setup(
     long_description=open('README.md').read(),
     author='Cody Soyland',
     author_email='codysoyland@gmail.com',
-    url='http://github.com/codysoyland/django-qunit/',
+    url='https://github.com/janetuk/django-qunit/',
     packages=[
         'django_qunit',
     ],
